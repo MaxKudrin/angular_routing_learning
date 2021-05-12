@@ -102,3 +102,31 @@ routes:Routes = [
     {{item.name}}
 </a>
 ```
+
+### 6. Обработка параметров
+
+> - в конструктор поста передаем `route:ActivatedRoute`, у которого есть `params` (это стрим), подписываемся на него и в колбеке получаем параметры из строки роута, данные с типом `Params`, id будет **строкой**!
+> - дальше в конструктор передаем `postsService: PostsService`, у которого есть метод `getPostById()`
+> - дальше выполняем програмную навигацию используя `router: Router`, метод `navigate`
+> - данные из `this.post` передаем через _интерполяцию_ в шаблон
+
+```
+export class PostComponent implements OnInit{
+    post:Post
+    constructor(
+        private route:ActivatedRoute,
+        private postsServices:PostsServices,
+        private router: Router){}
+    ngOnInit(){
+        this.route.params.subscribe((params:Params)=>{
+            this.post = this.postsServices.getById(+params.id)
+        })
+    }
+
+    //Повторение программной навигации
+
+    goToPostFour(){
+        this.router.navigate(['/posts', 44])
+    }
+}
+```
