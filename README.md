@@ -1,27 +1,41 @@
-# AngularBasics
+# Краткое пособие по Routing в Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0.
+#### _автор: Кудрин Максим, почта: maxim.kudrin@gmail.com_
 
-## Development server
+## Что такое Роутинг?
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Это возможность осуществлять навигацию по приложению
 
-## Code scaffolding
+## Структура MindCard
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Зарегистрировать роуты
+2.
+3.
+4.
+5.
+6.
 
-## Build
+## Развернутые ответы
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### 1. Зарегистрировать роуты
 
-## Running unit tests
+> - в корне src/app создаем файл `app-routing.module.ts`
+> - импорты подтягиваю автоматически
+> - важно не писать `"/"` в пути
+> - важно зарегистрировать в импортах `app.module.ts`
+> - для отображения используем `<router-outlet>`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
 
-## Running end-to-end tests
+const routes:Routes = [
+    {path: "", component: "YourComponent"},
+    {path: "About", component: "AboutComponent"},
+]
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
+})
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+export class AppRoutingModule
+```
