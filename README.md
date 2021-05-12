@@ -80,3 +80,25 @@ export class TestComponent{
     }
 }
 ```
+
+### 5. Динамические роуты
+
+> - специальным образом регистрируем роут с динамикой, пример ниже.
+> - выводим ссылки с роутами из массива, например, при выводе из массива через директиву `*ngFor="let item of items"`
+> - `<a roterLink=['/',str]>`, динамика в `str`
+
+регистрация роута в модуле, `:id` можно название любое
+
+```
+routes:Routes = [
+    {path: 'posts/:id', component: PostComponent}
+]
+```
+
+динамический вывод из массива
+
+```
+<a *ngFor="let item of items" [routerLink]="['/posts',item.id]">
+    {{item.name}}
+</a>
+```
