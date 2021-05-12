@@ -12,8 +12,8 @@
 2. Динамическая смена страниц используя routerLink
 3. Активная ссылка routerLinkActive, routerLinkActiveOptions
 4. Програмная навигация, Router
-5.
-6.
+5. Динамические роуты
+6. Обработка параметров
 
 ## Развернутые ответы
 
@@ -128,5 +128,43 @@ export class PostComponent implements OnInit{
     goToPostFour(){
         this.router.navigate(['/posts', 44])
     }
+}
+```
+
+### 7. Работа с параметрами
+
+> - есть два способа отправить параметры: программно и из шаблона
+
+из шаблона результат будет `/posts?param=value#fragm`:
+
+```
+<button
+    routerLink="posts"
+    [queryParams]="{param:"value"}"
+    fragment="fragm"
+>Send params
+</button>
+```
+
+программно результат будет `/posts?hello=world#qq`:
+
+```
+sendHandler(router:Router){
+    router.navigate(['/posts'],
+    {queryParams:{hello:"world"}, fragment: 'qq'})
+}
+```
+
+получить `параметры` и `фрагмент` можно так:
+
+```
+constructor(privat route:ActivatedRoute)
+ngOnInit(){
+    this.route.queryParams.subscribe((params:Params)=>{
+        console.log(params)
+    })
+    this.route.fragment.subscribe((fragment)=>{
+        console.log(fragment)
+    })
 }
 ```
